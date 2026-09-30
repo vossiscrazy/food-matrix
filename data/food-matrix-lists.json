@@ -1,0 +1,148 @@
+{
+  "source": "Robb Wolf's The Food Matrix (guide PDF table)",
+  "formula": "1 Fat + 1 Protein + 1 Veggie + 1 Spice",
+  "comboBaseline": 81000,
+  "denseCarbFootnote": "*dense carbohydrate \u2013 eat in moderation until leanness goals are reached",
+  "proteins": [
+    "Chicken breast",
+    "Chicken thigh",
+    "Flounder",
+    "Snapper",
+    "Trout",
+    "Halibut",
+    "Mackerel",
+    "Bass",
+    "Salmon steak",
+    "Salmon fillet",
+    "Shrimp",
+    "New York steak",
+    "Rib eye steak",
+    "Round steak",
+    "Ground beef",
+    "Beef ribs",
+    "Rump roast",
+    "Beef stew meat",
+    "Pork loin",
+    "Pork chop",
+    "Pork ribs",
+    "Baby back ribs",
+    "Bacon",
+    "Pork roast",
+    "Lamb chops",
+    "Lamb rack",
+    "Venison steaks"
+  ],
+  "vegetables": [
+    {
+      "name": "Asparagus"
+    },
+    {
+      "name": "Avocado"
+    },
+    {
+      "name": "Artichoke hearts"
+    },
+    {
+      "name": "Brussels sprouts"
+    },
+    {
+      "name": "Beets",
+      "denseCarb": true
+    },
+    {
+      "name": "Carrots"
+    },
+    {
+      "name": "Celery"
+    },
+    {
+      "name": "Daikon"
+    },
+    {
+      "name": "Zucchini"
+    },
+    {
+      "name": "Fennel Root"
+    },
+    {
+      "name": "Kale"
+    },
+    {
+      "name": "Chard"
+    },
+    {
+      "name": "Dandelion greens"
+    },
+    {
+      "name": "Spinach"
+    },
+    {
+      "name": "Acorn Squash",
+      "denseCarb": true
+    },
+    {
+      "name": "Butternut Squash",
+      "denseCarb": true
+    },
+    {
+      "name": "Yam",
+      "denseCarb": true
+    },
+    {
+      "name": "Sweet Potato",
+      "denseCarb": true
+    },
+    {
+      "name": "Red pepper"
+    },
+    {
+      "name": "Yellow pepper"
+    },
+    {
+      "name": "Green pepper"
+    },
+    {
+      "name": "Red cabbage"
+    },
+    {
+      "name": "Green cabbage"
+    },
+    {
+      "name": "Napa cabbage"
+    }
+  ],
+  "fats": [
+    "Coconut oil",
+    "Olive oil",
+    "Macadamia oil",
+    "Avocado oil",
+    "Lard"
+  ],
+  "herbsAndSpices": [
+    "Allspice",
+    "Basil",
+    "Cardamom",
+    "Cinnamon",
+    "Celery seed",
+    "Dill",
+    "Fenugreek",
+    "Garlic",
+    "Ginger",
+    "Curry-Red",
+    "Curry-Green",
+    "Curry-Yellow",
+    "Oregano",
+    "Cillantro",
+    "Nutmeg",
+    "Rosemary",
+    "Thyme",
+    "Garam Masala",
+    "Bay Leaf",
+    "Salt",
+    "Herbs de Provance",
+    "Chili powder",
+    "Paprika",
+    "Cumin",
+    "Black pepper"
+  ]
+}

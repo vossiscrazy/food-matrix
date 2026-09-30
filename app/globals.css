@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --ground: #f7f7f5;
+  --surface: #ffffff;
+  --border: #c8c8c4;
+  --border-soft: #e0e0dc;
+  --text: #2a2a28;
+  --text-muted: #6a6a66;
+  --text-faint: #8a8a86;
+  --selected-fill: #ebebe8;
+  --selected-rule: #2a2a28;
+  --pill-bg: #2a2a28;
+  --pill-text: #f7f7f5;
+  --slot-empty: #d8d8d4;
+  --header-bg: #f7f7f5;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-selected-fill: var(--selected-fill);
+  --color-selected-rule: var(--selected-rule);
+  --color-pill-bg: var(--pill-bg);
+  --color-pill-text: var(--pill-text);
+  --color-slot-empty: var(--slot-empty);
+  --color-header-bg: var(--header-bg);
+  --font-sans: var(--font-geist-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Keep selection chrome greyscale-only; no hue utilities used in this app */
+.fm-row {
+  border-left: 3px solid transparent;
+}
+
+.fm-row[data-selected="true"] {
+  background: var(--selected-fill);
+  border-left-color: var(--selected-rule);
+}
+
+.fm-row[data-focused="true"]:not([data-selected="true"]) {
+  background: #f0f0ed;
+}
+
+.fm-column-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #b0b0ac transparent;
+}
+
+.fm-column-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.fm-column-scroll::-webkit-scrollbar-thumb {
+  background: #b0b0ac;
+  border-radius: 4px;
+}
