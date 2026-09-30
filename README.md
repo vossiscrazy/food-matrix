@@ -1,10 +1,8 @@
 # Food Matrix
 
-Desktop-first educational Food Matrix UI (Robb Wolf formula).
+Desktop greyscale four-column food lists (Robb Wolf matrix names).
 
-**Stack:** Next.js App Router · TypeScript · Tailwind · local JSON lists.
-
-**Not medical advice.** Educational product only.
+**Stack:** Next.js App Router · TypeScript · Tailwind · local JSON.
 
 ## Run
 
@@ -12,8 +10,6 @@ Desktop-first educational Food Matrix UI (Robb Wolf formula).
 npm install
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000).
 
 ## Build
 
@@ -23,4 +19,4 @@ npm run build
 
 ## Data
 
-Exact printed names live in `data/food-matrix-lists.json` (27 proteins · 24 vegetables · 5 fats · 25 herbs & spices).
+Exact printed names in `data/food-matrix-lists.json` (27 / 24 / 5 / 25).

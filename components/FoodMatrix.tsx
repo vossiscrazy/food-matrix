@@ -1,22 +1,11 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import { BottomTray } from "@/components/BottomTray";
+import { useCallback, useMemo, useState } from "react";
+import { FoodColumn, type ColumnItem } from "@/components/FoodColumn";
+import { foodLists } from "@/lib/food-data";
 import {
-  FoodColumn,
-  type ColumnItem,
-  type FoodColumnHandle,
-} from "@/components/FoodColumn";
-import { HeaderSlots } from "@/components/HeaderSlots";
-import {
-  comboCount,
-  foodLists,
-  formatComboCount,
-} from "@/lib/food-data";
-import {
-  COACH_LINE,
   COLUMN_ORDER,
-  DENSE_CARB_CHIP_CAPTION,
+  DENSE_CARB_FOOTNOTE_SHORT,
   type ColumnId,
   type Selection,
 } from "@/lib/types";
@@ -46,13 +35,13 @@ function matchesFilter(label: string, filter: string): boolean {
 export function FoodMatrix() {
   const allItems: Record<ColumnId, ColumnItem[]> = useMemo(
     () => ({
-      fat: foodLists.fats.map((name) => ({ id: name, label: name })),
       protein: foodLists.proteins.map((name) => ({ id: name, label: name })),
       vegetable: foodLists.vegetables.map((v) => ({
         id: v.name,
         label: v.name,
         denseCarb: Boolean(v.denseCarb),
       })),
+      fat: foodLists.fats.map((name) => ({ id: name, label: name })),
       spice: foodLists.herbsAndSpices.map((name) => ({
         id: name,
         label: name,
@@ -63,14 +52,9 @@ export function FoodMatrix() {
 
   const [selection, setSelection] = useState<Selection>(emptySelection);
   const [filters, setFilters] = useState<Record<ColumnId, string>>(emptyFilters);
-  const [focusedColumn, setFocusedColumn] = useState<ColumnId>("fat");
+  const [focusedColumn, setFocusedColumn] = useState<ColumnId>("protein");
   const [focusedIndex, setFocusedIndex] =
     useState<Record<ColumnId, number>>(emptyFocusedIndex);
-  const [toast, setToast] = useState<string | null>(null);
-
-  const columnRefs = useRef<Partial<Record<ColumnId, FoodColumnHandle | null>>>(
-    {},
-  );
 
   const visibleItems = useMemo(() => {
     const next = {} as Record<ColumnId, ColumnItem[]>;
@@ -82,56 +66,12 @@ export function FoodMatrix() {
     return next;
   }, [allItems, filters]);
 
-  const mealComplete = COLUMN_ORDER.every((col) => selection[col.id] !== null);
-  const anyFilled = COLUMN_ORDER.some((col) => selection[col.id] !== null);
-
-  const denseCarbByName = useMemo(() => {
-    const map = new Map<string, boolean>();
-    for (const v of foodLists.vegetables) {
-      map.set(v.name, Boolean(v.denseCarb));
-    }
-    return map;
-  }, []);
-
   const selectInColumn = useCallback((column: ColumnId, id: string) => {
     setSelection((prev) => ({
       ...prev,
       [column]: toggleValue(prev[column], id),
     }));
   }, []);
-
-  const clearSlot = useCallback((column: ColumnId) => {
-    setSelection((prev) => ({ ...prev, [column]: null }));
-  }, []);
-
-  const clearMeal = useCallback(() => {
-    setSelection(emptySelection());
-    setToast(null);
-  }, []);
-
-  const focusColumn = useCallback((column: ColumnId) => {
-    setFocusedColumn(column);
-    const handle = columnRefs.current[column];
-    handle?.focusList();
-    // Scroll after focus so the selected row is visible when present in filter
-    requestAnimationFrame(() => {
-      handle?.scrollSelectedIntoView();
-    });
-  }, []);
-
-  const focusFirstEmpty = useCallback(() => {
-    const firstEmpty = COLUMN_ORDER.find((col) => selection[col.id] === null);
-    if (firstEmpty) focusColumn(firstEmpty.id);
-  }, [focusColumn, selection]);
-
-  const handleCook = useCallback(() => {
-    if (!mealComplete) {
-      focusFirstEmpty();
-      return;
-    }
-    setToast("Saved locally");
-    window.setTimeout(() => setToast(null), 2000);
-  }, [focusFirstEmpty, mealComplete]);
 
   const setFilter = useCallback((column: ColumnId, value: string) => {
     setFilters((prev) => ({ ...prev, [column]: value }));
@@ -187,54 +127,13 @@ export function FoodMatrix() {
     [focusedIndex, selectInColumn, visibleItems],
   );
 
-  const headerSlots = COLUMN_ORDER.map((col) => ({
-    columnId: col.id,
-    role: col.role,
-    value: selection[col.id],
-  }));
-
-  const traySlots = COLUMN_ORDER.map((col) => {
-    const value = selection[col.id];
-    const denseCarb =
-      col.id === "vegetable" && value
-        ? Boolean(denseCarbByName.get(value))
-        : false;
-    return {
-      columnId: col.id,
-      role: col.role,
-      value,
-      denseCarb,
-      moderationCaption: denseCarb ? DENSE_CARB_CHIP_CAPTION : undefined,
-    };
-  });
-
   return (
-    <div className="flex h-dvh min-h-[640px] flex-col bg-ground text-text">
-      <header className="shrink-0 border-b border-border bg-surface px-5 py-4">
-        <div className="mx-auto max-w-[1600px]">
-          <div className="flex items-start justify-between gap-6">
-            <div className="min-w-0">
-              <h1 className="text-xl font-semibold tracking-tight text-text">
-                Food Matrix
-              </h1>
-              <p className="mt-1 text-sm text-text-muted">{COACH_LINE}</p>
-            </div>
-            <p className="shrink-0 pt-1 text-sm text-text-muted tabular-nums">
-              {formatComboCount(comboCount)} meals
-            </p>
-          </div>
-          <HeaderSlots slots={headerSlots} mealReady={mealComplete} />
-        </div>
-      </header>
-
-      <main className="mx-auto flex min-h-0 w-full max-w-[1600px] flex-1 overflow-hidden border-x border-border-soft bg-surface">
+    <div className="box-border flex h-dvh min-h-[640px] flex-col bg-ground px-8 py-8 text-text">
+      <main className="mx-auto flex min-h-0 w-full max-w-[1440px] min-w-0 flex-1 overflow-hidden border border-border-soft bg-surface">
         <div className="flex min-h-0 w-full min-w-[1280px] flex-1">
           {COLUMN_ORDER.map((col) => (
             <FoodColumn
               key={col.id}
-              ref={(handle) => {
-                columnRefs.current[col.id] = handle;
-              }}
               title={col.title}
               items={visibleItems[col.id]}
               filter={filters[col.id]}
@@ -243,9 +142,7 @@ export function FoodMatrix() {
               focusedIndex={focusedIndex[col.id]}
               isColumnFocused={focusedColumn === col.id}
               footnote={
-                col.id === "vegetable"
-                  ? foodLists.denseCarbFootnote
-                  : undefined
+                col.id === "vegetable" ? DENSE_CARB_FOOTNOTE_SHORT : undefined
               }
               onSelect={(id) => selectInColumn(col.id, id)}
               onFocusColumn={() => setFocusedColumn(col.id)}
@@ -257,17 +154,6 @@ export function FoodMatrix() {
           ))}
         </div>
       </main>
-
-      <BottomTray
-        slots={traySlots}
-        mealComplete={mealComplete}
-        anyFilled={anyFilled}
-        toast={toast}
-        onCook={handleCook}
-        onClearMeal={clearMeal}
-        onChipClick={focusColumn}
-        onChipClear={clearSlot}
-      />
     </div>
   );
 }

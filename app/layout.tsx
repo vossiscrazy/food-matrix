@@ -9,8 +9,7 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: "Food Matrix",
-  description:
-    "Educational Food Matrix meal builder. Not medical advice.",
+  description: "Food Matrix food lists",
 };
 
 export default function RootLayout({

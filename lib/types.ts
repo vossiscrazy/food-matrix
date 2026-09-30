@@ -14,25 +14,22 @@ export type FoodLists = {
   herbsAndSpices: string[];
 };
 
-export type ColumnId = "fat" | "protein" | "vegetable" | "spice";
+export type ColumnId = "protein" | "vegetable" | "fat" | "spice";
 
 export type Selection = Record<ColumnId, string | null>;
 
 export type ColumnMeta = {
   id: ColumnId;
   title: string;
-  role: string;
 };
 
-/** Formula / tray / column order left → right */
+/** Robb table order left → right (columns-only v1.4) */
 export const COLUMN_ORDER: ColumnMeta[] = [
-  { id: "fat", title: "Fats", role: "Fat" },
-  { id: "protein", title: "Proteins", role: "Protein" },
-  { id: "vegetable", title: "Vegetables", role: "Vegetable" },
-  { id: "spice", title: "Herbs & Spices", role: "Spice" },
+  { id: "protein", title: "Protein" },
+  { id: "vegetable", title: "Vegetable" },
+  { id: "fat", title: "Fat" },
+  { id: "spice", title: "Herbs & Spices" },
 ];
 
-export const COACH_LINE =
-  "Pick one from each column for a one-pan meal.";
-
-export const DENSE_CARB_CHIP_CAPTION = "eat in moderation";
+/** Mock-tone Vegetable footnote (v1.4) */
+export const DENSE_CARB_FOOTNOTE_SHORT = "* dense carbohydrate";
