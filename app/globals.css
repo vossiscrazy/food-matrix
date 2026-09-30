@@ -14,6 +14,9 @@
   --pill-text: #f7f7f5;
   --slot-empty: #d8d8d4;
   --header-bg: #f7f7f5;
+  --focus-ring: #6a6a66;
+  --disabled-border: #b8b8b4;
+  --disabled-text: #9a9a96;
 }
 
 @theme inline {
@@ -30,6 +33,9 @@
   --color-pill-text: var(--pill-text);
   --color-slot-empty: var(--slot-empty);
   --color-header-bg: var(--header-bg);
+  --color-focus-ring: var(--focus-ring);
+  --color-disabled-border: var(--disabled-border);
+  --color-disabled-text: var(--disabled-text);
   --font-sans: var(--font-geist-sans);
 }
 
@@ -49,9 +55,19 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Keep selection chrome greyscale-only; no hue utilities used in this app */
+/* Greyscale focus ring — replace browser blue default */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 .fm-row {
   border-left: 3px solid transparent;
+  min-height: 40px;
 }
 
 .fm-row[data-selected="true"] {
@@ -61,6 +77,16 @@ body {
 
 .fm-row[data-focused="true"]:not([data-selected="true"]) {
   background: #f0f0ed;
+}
+
+.fm-listbox:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.fm-filter:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
 }
 
 .fm-column-scroll {
@@ -75,4 +101,16 @@ body {
 .fm-column-scroll::-webkit-scrollbar-thumb {
   background: #b0b0ac;
   border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
