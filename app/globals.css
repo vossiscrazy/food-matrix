@@ -1,31 +1,39 @@
 @import "tailwindcss";
 
+/* SpaceXAI tokens — sole palette (design/spacexai-design-system.md) */
 :root {
-  --ground: #f7f7f5;
-  --surface: #ffffff;
-  --border: #c8c8c4;
-  --border-soft: #e0e0dc;
-  --text: #2a2a28;
-  --text-muted: #6a6a66;
-  --text-faint: #8a8a86;
-  --selected-fill: #ebebe8;
-  --selected-rule: #2a2a28;
-  --header-bg: #f7f7f5;
-  --focus-ring: #6a6a66;
+  color-scheme: dark;
+  --sx-canvas-deepest: #050505;
+  --sx-canvas: #0a0a0a;
+  --sx-canvas-raised: #121212;
+  --sx-canvas-elevated: #181716;
+  --sx-surface-muted: #333333;
+  --sx-surface-selection: #2a2a2a;
+  --sx-text-primary: #fcfcfc;
+  --sx-text-secondary: #9e9e9e;
+  --sx-text-tertiary: #636363;
+  --sx-accent: #fa7500;
+  --sx-accent-muted: rgba(250, 117, 0, 0.15);
+  --sx-accent-border: rgba(250, 117, 0, 0.45);
+  --sx-danger: #f7768e;
+  --sx-warning: #dcdcaa;
+  --sx-success: #91c17a;
+  --sx-info: #569cd6;
 }
 
 @theme inline {
-  --color-ground: var(--ground);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
-  --color-border-soft: var(--border-soft);
-  --color-text: var(--text);
-  --color-text-muted: var(--text-muted);
-  --color-text-faint: var(--text-faint);
-  --color-selected-fill: var(--selected-fill);
-  --color-selected-rule: var(--selected-rule);
-  --color-header-bg: var(--header-bg);
-  --color-focus-ring: var(--focus-ring);
+  --color-sx-canvas-deepest: var(--sx-canvas-deepest);
+  --color-sx-canvas: var(--sx-canvas);
+  --color-sx-canvas-raised: var(--sx-canvas-raised);
+  --color-sx-canvas-elevated: var(--sx-canvas-elevated);
+  --color-sx-surface-muted: var(--sx-surface-muted);
+  --color-sx-surface-selection: var(--sx-surface-selection);
+  --color-sx-text-primary: var(--sx-text-primary);
+  --color-sx-text-secondary: var(--sx-text-secondary);
+  --color-sx-text-tertiary: var(--sx-text-tertiary);
+  --color-sx-accent: var(--sx-accent);
+  --color-sx-accent-muted: var(--sx-accent-muted);
+  --color-sx-accent-border: var(--sx-accent-border);
   --font-sans: var(--font-geist-sans);
 }
 
@@ -40,9 +48,9 @@ body {
 }
 
 body {
-  background: var(--ground);
-  color: var(--text);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--sx-canvas);
+  color: var(--sx-text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 :focus {
@@ -50,37 +58,50 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid var(--sx-accent-border);
   outline-offset: 2px;
 }
 
 .fm-row {
   border-left: 3px solid transparent;
   min-height: 40px;
+  transition: background-color 180ms ease;
+}
+
+.fm-row:hover:not([data-selected="true"]) {
+  background: var(--sx-surface-selection);
 }
 
 .fm-row[data-selected="true"] {
-  background: var(--selected-fill);
-  border-left-color: var(--selected-rule);
+  background: var(--sx-accent-muted);
+  border-left-color: var(--sx-accent);
 }
 
 .fm-row[data-focused="true"]:not([data-selected="true"]) {
-  background: #f0f0ed;
+  background: var(--sx-surface-selection);
 }
 
 .fm-listbox:focus-visible {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid var(--sx-accent-border);
   outline-offset: -2px;
 }
 
+.fm-filter {
+  border-radius: 8px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
 .fm-filter:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 1px;
+  outline: 2px solid var(--sx-accent);
+  outline-offset: 2px;
+  border-color: var(--sx-accent-border);
 }
 
 .fm-column-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #b0b0ac transparent;
+  scrollbar-color: var(--sx-surface-muted) transparent;
 }
 
 .fm-column-scroll::-webkit-scrollbar {
@@ -88,8 +109,15 @@ body {
 }
 
 .fm-column-scroll::-webkit-scrollbar-thumb {
-  background: #b0b0ac;
+  background: var(--sx-surface-muted);
   border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fm-row,
+  .fm-filter {
+    transition: none;
+  }
 }
 
 .sr-only {

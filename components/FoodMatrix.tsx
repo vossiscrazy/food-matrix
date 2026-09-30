@@ -128,8 +128,8 @@ export function FoodMatrix() {
   );
 
   return (
-    <div className="box-border flex h-dvh min-h-[640px] flex-col bg-ground px-8 py-8 text-text">
-      <main className="mx-auto flex min-h-0 w-full max-w-[1440px] min-w-0 flex-1 overflow-hidden border border-border-soft bg-surface">
+    <div className="box-border flex h-dvh min-h-[640px] flex-col bg-sx-canvas px-8 py-8 text-sx-text-primary">
+      <main className="mx-auto flex min-h-0 w-full max-w-[1440px] min-w-0 flex-1 overflow-hidden border border-sx-surface-muted bg-sx-canvas-raised">
         <div className="flex min-h-0 w-full min-w-[1280px] flex-1">
           {COLUMN_ORDER.map((col) => (
             <FoodColumn

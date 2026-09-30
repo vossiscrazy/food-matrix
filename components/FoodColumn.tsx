@@ -46,11 +46,11 @@ export function FoodColumn({
 
   return (
     <section
-      className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-border last:border-r-0"
+      className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-sx-surface-muted last:border-r-0"
       aria-label={title}
     >
-      <header className="sticky top-0 z-10 flex max-h-[72px] flex-col justify-center gap-2 border-b border-border bg-header-bg px-4 py-2">
-        <h2 className="text-xs font-semibold tracking-[0.12em] text-text uppercase">
+      <header className="sticky top-0 z-10 flex max-h-[72px] flex-col justify-center gap-2 border-b border-sx-surface-muted bg-sx-canvas-elevated px-4 py-2">
+        <h2 className="text-xs font-semibold tracking-[0.12em] text-sx-text-primary uppercase">
           {title}
         </h2>
         <label className="block">
@@ -61,7 +61,7 @@ export function FoodColumn({
             onChange={(e) => onFilterChange(e.target.value)}
             onFocus={onFocusColumn}
             placeholder="Filter…"
-            className="fm-filter h-8 w-full rounded-md border border-border-soft bg-surface px-2.5 text-sm text-text placeholder:text-text-faint"
+            className="fm-filter h-8 w-full border border-sx-surface-muted bg-sx-canvas-elevated px-2.5 text-sm text-sx-text-primary placeholder:text-sx-text-tertiary"
             autoComplete="off"
             spellCheck={false}
           />
@@ -77,7 +77,7 @@ export function FoodColumn({
         className="fm-listbox fm-column-scroll min-h-0 flex-1 overflow-y-auto outline-none"
       >
         {items.length === 0 ? (
-          <p className="px-4 py-3 text-sm text-text-faint">No matches</p>
+          <p className="px-4 py-3 text-sm text-sx-text-tertiary">No matches</p>
         ) : (
           items.map((item, index) => {
             const selected = selectedId === item.id;
@@ -94,7 +94,7 @@ export function FoodColumn({
                 aria-selected={selected}
                 data-selected={selected ? "true" : "false"}
                 data-focused={focused ? "true" : "false"}
-                className="fm-row flex w-full cursor-pointer items-center px-4 text-left text-sm text-text hover:bg-[#f0f0ed]"
+                className="fm-row flex w-full cursor-pointer items-center px-4 text-left text-sm text-sx-text-primary"
                 onClick={() => {
                   onFocusColumn();
                   onFocusIndex(index);
@@ -115,7 +115,7 @@ export function FoodColumn({
       </div>
 
       {footnote ? (
-        <p className="border-t border-border-soft px-4 py-2 text-[11px] leading-snug text-text-faint">
+        <p className="border-t border-sx-surface-muted px-4 py-2 text-[11px] leading-snug text-sx-text-secondary">
           {footnote}
         </p>
       ) : null}
