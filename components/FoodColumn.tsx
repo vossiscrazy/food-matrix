@@ -75,6 +75,7 @@ export function FoodColumn({
               }}
               type="button"
               role="option"
+              tabIndex={-1}
               aria-selected={selected}
               data-selected={selected ? "true" : "false"}
               data-focused={focused ? "true" : "false"}
