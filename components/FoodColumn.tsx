@@ -17,6 +17,8 @@ type FoodColumnProps = {
   focusedIndex: number;
   isColumnFocused: boolean;
   footnote?: string;
+  /** Picked names pinned under the header, above Filter (version D). */
+  pinned?: { id: string; label: string }[];
   onSelect: (id: string) => void;
   onFocusColumn: () => void;
   onFocusIndex: (index: number) => void;
@@ -32,6 +34,7 @@ export function FoodColumn({
   focusedIndex,
   isColumnFocused,
   footnote,
+  pinned,
   onSelect,
   onFocusColumn,
   onFocusIndex,
@@ -49,10 +52,32 @@ export function FoodColumn({
       className="flex min-h-0 min-w-0 flex-1 flex-col border-r border-sx-surface-muted last:border-r-0"
       aria-label={title}
     >
-      <header className="sticky top-0 z-10 flex max-h-[72px] flex-col justify-center gap-2 border-b border-sx-surface-muted bg-sx-canvas-elevated px-4 py-2">
+      <header
+        className={`sticky top-0 z-10 flex shrink-0 flex-col justify-center gap-2 border-b border-sx-surface-muted bg-sx-canvas-elevated px-4 py-2 ${
+          pinned ? "" : "max-h-[72px]"
+        }`}
+      >
         <h2 className="text-xs font-semibold tracking-[0.12em] text-sx-text-primary uppercase">
           {title}
         </h2>
+        {pinned && pinned.length > 0 ? (
+          <ul
+            aria-label={`Picked ${title}`}
+            className="fm-column-scroll max-h-[120px] overflow-y-auto"
+          >
+            {pinned.map((pin) => (
+              <li key={pin.id}>
+                <button
+                  type="button"
+                  onClick={() => onSelect(pin.id)}
+                  className="w-full py-0.5 text-left text-sm text-sx-text-primary hover:text-sx-text-secondary"
+                >
+                  {pin.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
         <label className="block">
           <span className="sr-only">Filter {title}</span>
           <input

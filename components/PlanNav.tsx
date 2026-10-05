@@ -8,6 +8,10 @@ const LINKS = [
   { href: "/plan/fill", label: "Fill the four" },
   { href: "/plan/line", label: "One line" },
   { href: "/plan/several", label: "Several meals" },
+  { href: "/plan/pinned", label: "Pinned" },
+  { href: "/plan/rail", label: "Rail" },
+  { href: "/plan/open", label: "One open" },
+  { href: "/plan/views", label: "Two views" },
 ] as const;
 
 export function PlanNav() {

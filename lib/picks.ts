@@ -64,15 +64,18 @@ export function anyPick(picks: Picks): boolean {
   return COLUMN_ORDER.some((column) => picks[column.id].length > 0);
 }
 
+export function orderedIds(column: ColumnId, ids: string[]): string[] {
+  return [...ids].sort(
+    (a, b) => (listOrder[column].get(a) ?? 0) - (listOrder[column].get(b) ?? 0),
+  );
+}
+
+export function pickLabel(column: ColumnId, id: string): string {
+  return column === "vegetable" && denseCarb.has(id) ? `${id}*` : id;
+}
+
 export function orderedLabels(column: ColumnId, ids: string[]): string[] {
-  return [...ids]
-    .sort(
-      (a, b) =>
-        (listOrder[column].get(a) ?? 0) - (listOrder[column].get(b) ?? 0),
-    )
-    .map((id) =>
-      column === "vegetable" && denseCarb.has(id) ? `${id}*` : id,
-    );
+  return orderedIds(column, ids).map((id) => pickLabel(column, id));
 }
 
 /** Category order. Empty roles stay named when includeEmpty is true. */
