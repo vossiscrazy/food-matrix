@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { PlanNav } from "@/components/PlanNav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${geistSans.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} flex h-dvh flex-col antialiased`}>
+        <PlanNav />
+        <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+      </body>
     </html>
   );
 }

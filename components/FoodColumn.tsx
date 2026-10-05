@@ -13,7 +13,7 @@ type FoodColumnProps = {
   items: ColumnItem[];
   filter: string;
   onFilterChange: (value: string) => void;
-  selectedId: string | null;
+  selectedIds: readonly string[];
   focusedIndex: number;
   isColumnFocused: boolean;
   footnote?: string;
@@ -28,7 +28,7 @@ export function FoodColumn({
   items,
   filter,
   onFilterChange,
-  selectedId,
+  selectedIds,
   focusedIndex,
   isColumnFocused,
   footnote,
@@ -80,7 +80,7 @@ export function FoodColumn({
           <p className="px-4 py-3 text-sm text-sx-text-tertiary">No matches</p>
         ) : (
           items.map((item, index) => {
-            const selected = selectedId === item.id;
+            const selected = selectedIds.includes(item.id);
             const focused = isColumnFocused && focusedIndex === index;
             return (
               <button
